@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
@@ -33,6 +34,7 @@ class AuthController extends Controller
 		      "status_code" => 200,
 		      "access_token" => $tokenResult,
 		      "token_type" => "Bearer",
+              "user" => new UserResource($user)
 	    ]);
 	  } catch (Exception $error) {
 	    return response()->json([
@@ -61,7 +63,8 @@ class AuthController extends Controller
 			      "status_code" => 200,
 			      "access_token" => $tokenResult,
 			      "token_type" => "Bearer",
-			      "status" => "user created"
+			      "status" => "user created",
+                  "user"=> new UserResource($user)
 		    ]);
     	}catch (Exception $error) {
 		    return response()->json([
@@ -73,6 +76,6 @@ class AuthController extends Controller
 	    }
 
         public function user(Request  $request){
-            return auth()->user;
+            return new UserResource(auth()->user);
         }
 }
