@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Course;
+use App\Models\Gallery;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class CourseController extends AdminController
+class GalleryController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'Course';
+    protected $title = 'Gallery';
 
     /**
      * Make a grid builder.
@@ -24,12 +24,12 @@ class CourseController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Course());
+        $grid = new Grid(new Gallery());
 
         $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'));
-        $grid->column('desc', __('Desc'));
-        $grid->column('url', __('Url'));
+        $grid->column('title', __('Title'));
+        $grid->column('description', __('Description'));
+        $grid->column('image', __('Image'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -44,12 +44,12 @@ class CourseController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Course::findOrFail($id));
+        $show = new Show(Gallery::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('name', __('Name'));
-        $show->field('desc', __('Desc'));
-        $show->field('url', __('Url'));
+        $show->field('title', __('Title'));
+        $show->field('description', __('Description'));
+        $show->field('image', __('Image'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -63,13 +63,11 @@ class CourseController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Course());
+        $form = new Form(new Gallery());
 
-        $form->text('name', __('Name'));
-        $form->number('price', __('Price'));
-        $form->image('preview_url', __('Preview url'));
-        $form->textarea('desc', __('Desc'));
-        $form->url('url', __('Url'));
+        $form->text('title', __('Title'));
+        $form->text('description', __('Description'));
+        $form->image('image', __('Image'));
 
         return $form;
     }

@@ -28,9 +28,13 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->get('/blog/view/message/replies', 'App\Http\Controllers\BlogMessageReplyController@index')->name('view-blog-messages-replies');
     Route::middleware('auth:sanctum')->post('/user/courses/store', 'App\Http\Controllers\UserCourseController@store')->name('user-course-store');
 
+    Route::post('/gallery/comments', 'App\Http\Controllers\GalleryCommentsController@store');
+
     Route::post("/login", "App\Http\Controllers\AuthController@login");
     Route::get("/courses/all", "App\Http\Controllers\CourseController@index");
     Route::get("/courses/{course}", "App\Http\Controllers\CourseController@show");
+    Route::get("/galleries", "App\Http\Controllers\GalleryController@index");
+    Route::get("/galleries/{gallery}", "App\Http\Controllers\GalleryController@show");
 	// Route::middleware(["auth:sanctum"])->group(function () {
 	//   Route::get("/users", "UserController@index");
 	// });
