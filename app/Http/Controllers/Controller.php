@@ -17,7 +17,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    
+
     public function jsonError($message = "Unexpected Error", $statusCode = 500)
     {
         return response()->json(
@@ -38,13 +38,13 @@ class Controller extends BaseController
         );
     }
 
-    public function paynow($type="investment")
+    public function paynow()
     {
         return new Paynow(
             env("PAYNOW_ID", 9147),
             env("PAYNOW_KEY", "4cf19554-8466-41f0-a2d8-a316bb4a7b54"),
-            env("APP_URL")."/paynow/".$type,
-            env("APP_URL")."/paynow/".$type
+            env("APP_URL")."/paynow/course",
+            env("APP_URL")."/paynow/course"
         );
     }
     public function initiateTransaction($amount, $type, $mobile, $phone_number=null , $method = "paynow")
